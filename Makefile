@@ -1,4 +1,4 @@
-CC     = gcc
+CC = gcc
 CFLAGS = --std=gnu99 -Wall -g
 
 # Directories
@@ -6,7 +6,7 @@ SRC_DIR = src
 INC_DIR = include
 OBJ_DIR = obj
 
-OBJS    = $(OBJ_DIR)/parse.o
+OBJS = $(OBJ_DIR)/parse.o
 
 .PHONY = all default test clean
 

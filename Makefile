@@ -6,7 +6,7 @@ SRC_DIR = src
 INC_DIR = include
 OBJ_DIR = obj
 
-OBJS = $(OBJ_DIR)/parse.o
+OBJS = $(OBJ_DIR)/parse.o $(OBJ_DIR)/snoop.o
 
 .PHONY = all default test clean
 
@@ -16,14 +16,17 @@ help:
 	@echo "Targets: help, all, llc, test, and clean"
 
 llc: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(SRC_DIR)/main.c $^
+	$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(SRC_DIR)/main.c $^
 
 $(OBJ_DIR)/parse.o: $(SRC_DIR)/parse.c $(INC_DIR)/parse.h
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
+$(OBJ_DIR)/snoop.o: $(SRC_DIR)/snoop.c $(INC_DIR)/snoop.h
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+
 test:
-	@echo "Testing with test_file.txt ..."
-	llc -f=test_file.txt
+	@echo "Testing with test0.txt ..."
+	./llc -f test0.txt
 
 clean:
 	$(RM) $(OBJ_DIR)/*.o llc

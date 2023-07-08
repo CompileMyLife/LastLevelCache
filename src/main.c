@@ -4,6 +4,15 @@
 
 #include <unistd.h>
 
+#include "parse.h"
+
+// n-mode
+short mode = 0;
+
+// address vars
+uint32_t addr = 0x0;
+char* addr_str = NULL;
+
 int main(int argc, char *argv[]) {
     // Store option from CLI
     int opt;

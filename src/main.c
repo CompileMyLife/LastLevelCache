@@ -7,11 +7,14 @@
 #include "parse.h"
 
 // n-mode
-short mode = 0;
+int mode = 0;
 
 // address vars
 uint32_t addr = 0x0;
-char* addr_str = NULL;
+
+// Set and Tag
+uint16_t tag = 0;
+uint16_t set = 0;
 
 int main(int argc, char *argv[]) {
     // Store option from CLI
@@ -40,8 +43,8 @@ int main(int argc, char *argv[]) {
     }
 
     // Debug
-    printf("Normal Mode = %d, Silent Mode = %d, File Flag = %d, optind = %d\n", 
-            normal, silent, file_flg, optind);
+    //printf("Normal Mode = %d, Silent Mode = %d, File Flag = %d, optind = %d\n", 
+    //       normal, silent, file_flg, optind);
 
     if(optind > argc){
         fprintf(stderr, "Expected argument after options\n");
@@ -49,12 +52,24 @@ int main(int argc, char *argv[]) {
     }
 
     // Debug
-    printf("file argument = %s\n", file_name);
-
-    // LLC program
-    if (normal || silent) {
-        // Address Parse
+    //printf("file argument = %s\n", file_name);
+    
+    FILE *fptr = fopen(file_name, "r");
+    if (fptr == NULL) {
+        perror("ERROR: fopen() couldn't open file");
+        exit(EXIT_FAILURE);
     }
+
+    while(fscanf(fptr, "%d %x\n", &mode, &addr) != EOF) {
+
+        // LLC program
+        if (normal || silent) {
+            // Address Parse
+            address_parse(addr, &set, &tag);
+        }
+        printf("mode: %d, address: 0b%d, set: 0b%d, tag: 0b%d\n", mode, addr, set, tag); 
+    }
+    fclose(fptr);
 
     exit(EXIT_SUCCESS);
 

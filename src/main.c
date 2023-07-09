@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Debug
+    // DEBUG
     //printf("Normal Mode = %d, Silent Mode = %d, File Flag = %d, optind = %d\n", 
     //       normal, silent, file_flg, optind);
 
@@ -51,26 +51,35 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    // Debug
+    // DEBUG
     //printf("file argument = %s\n", file_name);
     
-    FILE *fptr = fopen(file_name, "r");
-    if (fptr == NULL) {
-        perror("ERROR: fopen() couldn't open file");
+    if (file_flg) {
+        FILE *fp = fopen(file_name, "r");
+        if (fp == NULL) {
+            perror("ERROR: fopen() couldn't open file");
+            exit(EXIT_FAILURE);
+        }
+
+        // Read each line of the test file with the following format until EOF.
+        // Then store the mode and address to respective variable.
+        while(fscanf(fp , "%d %x\n", &mode, &addr) != EOF) {
+            // LLC program
+            if (normal || silent) {
+                address_parse(addr, &set, &tag);
+            }
+            // DEBUG
+            printf("mode: %d, address: %X, set: %X, tag: %X\n", mode, addr, set, tag); 
+        }
+        fclose(fp);
+
+        exit(EXIT_SUCCESS);
+    }
+
+    else {
+        fprintf(stderr, "file_flg was not set\n");
         exit(EXIT_FAILURE);
     }
-
-    while(fscanf(fptr, "%d %x\n", &mode, &addr) != EOF) {
-
-        // LLC program
-        if (normal || silent) {
-            // Address Parse
-            address_parse(addr, &set, &tag);
-        }
-        printf("mode: %d, address: 0b%d, set: 0b%d, tag: 0b%d\n", mode, addr, set, tag); 
-    }
-    fclose(fptr);
-
-    exit(EXIT_SUCCESS);
-
+    
+    return 0;
 }

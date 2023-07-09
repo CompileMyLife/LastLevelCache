@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
     }
 
     else {
-        fprintf(stderr, "file_flg was not set\n");
+        fprintf(stderr, "ERROR: file_flg was not set\n");
         exit(EXIT_FAILURE);
     }
     

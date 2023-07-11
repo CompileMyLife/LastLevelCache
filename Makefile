@@ -32,4 +32,4 @@ test0:
 	./llc -f test0.txt
 
 clean:
-	$(RM) $(OBJ_DIR)/*.o llc
+	$(RM) $(OBJ_DIR)/*.o ./llc

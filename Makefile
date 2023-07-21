@@ -6,7 +6,7 @@ SRC_DIR = src
 INC_DIR = include
 OBJ_DIR = obj
 
-OBJS = $(OBJ_DIR)/parse.o $(OBJ_DIR)/snoop.o $(OBJ_DIR)/cache.o
+OBJS = $(OBJ_DIR)/parse.o $(OBJ_DIR)/snoop.o $(OBJ_DIR)/cache.o $(OBJ_DIR)/ops.o
 
 .PHONY = all default test clean
 
@@ -25,6 +25,9 @@ $(OBJ_DIR)/snoop.o: $(SRC_DIR)/snoop.c $(INC_DIR)/snoop.h
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 $(OBJ_DIR)/cache.o: $(SRC_DIR)/cache.c $(INC_DIR)/cache.h
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+
+$(OBJ_DIR)/ops.o: $(SRC_DIR)/ops.c $(INC_DIR)/ops.h
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 test0:

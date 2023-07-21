@@ -5,7 +5,11 @@ Set* create_cache(void) {
 
     // Allocate an array of 32768 sets and initalize each member in set to 0s
     cache = (Set *)calloc(32768, sizeof(Set));
-    
+    if (cache == NULL) {
+        perror("ERROR: calloc() unable to allocate cache");
+        exit(EXIT_FAILURE);
+    }
+
     return cache; 
 }
 
@@ -21,5 +25,13 @@ void init_cache(Set* _cache, Cache_Stats* _cache_stats) {
     _cache_stats->misses    = 0;
     _cache_stats->hit_ratio = 0;
 
-    // TODO: Initialize correct MESI and LRU bits for each sit in cache
+    // Initialize correct MESI state and LRU bits for each set in cache
+    // Iterate over each set
+    for (int i = 0; i < 32768; i++){
+        // Iterate over each way or line
+        for (int j = 0; j < 8; j++){
+            _cache[i].LRU_b[j]  = 0x7;      // Set as MRU
+            _cache[i].MESI_b[j] = INVALID;
+        }
+    }
 }

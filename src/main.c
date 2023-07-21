@@ -5,18 +5,12 @@
 
 #include "parse.h"
 #include "cache.h"
+#include "ops.h"
 
-#define DEBUG 0
+#define DEBUG 1
 
 // n-mode
-int mode = 0;
-
-// address vars
-uint32_t addr = 0x0;
-
-// Set and Tag
-uint16_t tag = 0;
-uint16_t set = 0;
+uint8_t mode = 0;
 
 int main(int argc, char *argv[]) { // Store option from CLI
     int opt;
@@ -53,12 +47,12 @@ int main(int argc, char *argv[]) { // Store option from CLI
         exit(EXIT_FAILURE);
     }
 
-    // DEBUG
 #if (DEBUG)
     printf("file argument = %s\n", file_name);
 #endif
     
     if (file_flg) {
+        // Create Cache_Stats
         Cache_Stats cache_stats;
 
         // Create Cache w/ 32768 sets 2^15 sets
@@ -75,24 +69,33 @@ int main(int argc, char *argv[]) { // Store option from CLI
 
         // Read each line of the test file with the following format until EOF.
         // Then store the mode and address to respective variable.
-        while(fscanf(fp, "%d %x\n", &mode, &addr) != EOF) {
+        while(fscanf(fp, "%hhu %x\n", &mode, &addr) != EOF) {
             // LLC program
-            if (normal || silent) {
-                address_parse(&addr, &set, &tag);
+            address_parse(&addr, &set, &tag, &byte_sel);
+            
+            switch(mode) {
+                case 0:
+                    mode_0(Cache, &cache_stats, &tag, &set, &byte_sel);
+                    break;
+                default:
+                    fprintf(stderr, "ERROR: Invalid parsed command\n");
             }
-
 #if (DEBUG)
-            printf("mode: %d, address: %X, set: %X, tag: %X\n", mode, addr, set, tag); 
+            printf("mode: %hhu, address: %X, tag: %X, set: %X, byte sel.: %X\n", mode, addr, tag, set, byte_sel); 
 #endif
         }
         fclose(fp);
 
+#if (DEBUG)
         for (int i = 0; i < 32768; i++){
             for(int j = 0; j < 8; j++){
-                printf("Cache[%d].tag[%d] = %X\n", i, j, Cache[i].tag[j]);
+                printf("Cache[%d].tag[%d]    = %X\n", i, j, Cache[i].tag[j]);
+                printf("Cache[%d].valid_b[%d] = %X\n", i, j, Cache[i].valid_b[j]);
+                printf("Cache[%d].LRU_b[%d]  = %X\n", i, j, Cache[i].LRU_b[j]);
+                printf("Cache[%d].MESI_b[%d] = %X\n", i, j, Cache[i].MESI_b[j]);
             }
         }
-
+#endif
         delete_cache(Cache);
 
         exit(EXIT_SUCCESS);

@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "cache.h"
+#include "PLRU.h"
 
 void mode_0(Set* _cache, Cache_Stats* _cache_stats, uint16_t* tag, uint16_t* set, uint8_t* byte_sel);
 

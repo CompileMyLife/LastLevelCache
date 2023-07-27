@@ -81,17 +81,17 @@ int main(int argc, char *argv[]) { // Store option from CLI
                     fprintf(stderr, "ERROR: Invalid parsed command\n");
             }
 #if (DEBUG)
-            printf("mode: %hhu, address: %X, tag: %X, set: %X, byte sel.: %X\n", mode, addr, tag, set, byte_sel); 
+            printf("mode: %hhu, address: %X, tag: %X, index: %X, byte sel.: %X\n", mode, addr, tag, set, byte_sel); 
 #endif
         }
         fclose(fp);
 
 #if (DEBUG)
         for (int i = 0; i < 32768; i++){
+            printf("Cache[%d].LRU_b = %X\n", i, Cache[i].LRU_b);
             for(int j = 0; j < 8; j++){
                 printf("Cache[%d].tag[%d]    = %X\n", i, j, Cache[i].tag[j]);
                 printf("Cache[%d].valid_b[%d] = %X\n", i, j, Cache[i].valid_b[j]);
-                printf("Cache[%d].LRU_b[%d]  = %X\n", i, j, Cache[i].LRU_b[j]);
                 printf("Cache[%d].MESI_b[%d] = %X\n", i, j, Cache[i].MESI_b[j]);
             }
         }

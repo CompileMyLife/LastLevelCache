@@ -28,10 +28,23 @@ void init_cache(Set* _cache, Cache_Stats* _cache_stats) {
     // Initialize correct MESI state and LRU bits for each set in cache
     // Iterate over each set
     for (int i = 0; i < 32768; i++){
+        _cache[i].LRU_b = 0x00;          // Set bits to 0 first
+
         // Iterate over each way or line
         for (int j = 0; j < 8; j++){
-            _cache[i].LRU_b[j]  = 0x7;      // Set as MRU
             _cache[i].MESI_b[j] = INVALID;
         }
     }
+}
+
+int tag_exists(Set* _cache, uint16_t* tag, uint16_t* set) {
+    // Iterate over each way to check if the tag exists
+    for (int i = 0; i < 8; i++) {
+        if (_cache[*set].tag[i] == *tag) {
+            return i; // return the way where the tag exists
+        }
+    }
+
+    // IF there is no tag that exists
+    return -1;
 }

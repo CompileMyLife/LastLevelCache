@@ -28,7 +28,7 @@ typedef struct __set {
     uint16_t tag[8];
     uint8_t  valid_b[8];
     //uint8_t  dirty_b[8]; 
-    uint8_t  LRU_b[8]; 
+    uint8_t  LRU_b; 
     _MESI_b  MESI_b[8];
 } Set;
 
@@ -37,6 +37,8 @@ Set* create_cache(void);
 void delete_cache(Set* _cache);
 
 void init_cache(Set* _cache, Cache_Stats* _cache_stats);
+
+int tag_exists(Set* _cache, uint16_t* tag, uint16_t* set);
 
 void print_cache_stats(Cache_Stats* _cache_stats, uint8_t* n, bool* mode);
 

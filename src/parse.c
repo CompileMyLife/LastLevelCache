@@ -13,5 +13,5 @@ void address_parse(uint32_t* address, uint16_t* _set, uint16_t* _tag, uint8_t* _
     *_set = (*address & 0x1FFFC0) >> 6;
 
     // Byte Select bits are [5:0]
-    *_byte_sel = (*address & 0x0000001F);
+    *_byte_sel = (*address & 0x0000003F);
 }

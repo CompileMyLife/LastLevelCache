@@ -40,17 +40,20 @@ $(OBJ_DIR)/PLRU.o: $(SRC_DIR)/PLRU.c $(INC_DIR)/PLRU.h
 test0:
 	@echo "Testing with tests/test0.txt ..."
 	@echo "tests/test0.txt contains valid and invalid addresses to test parsing"
-	./llc -f $(TST_DIR)/test0.txt > $(LOG_DIR)/llc_test0_log.txt
+	./llc -s -f $(TST_DIR)/test0.txt > $(LOG_DIR)/llc_test0_log.txt
 
 test1:
 	@echo "Testing with tests/test1.txt ..."
 	@echo "tests/test1.txt contain only read requests to same set"
-	./llc -f $(TST_DIR)/test1.txt > $(LOG_DIR)/llc_test1_log.txt
+	./llc -s -f $(TST_DIR)/test1.txt > $(LOG_DIR)/llc_test1_log.txt
 
 test2:
 	@echo "Testing with tests/test2.txt ..."
 	@echo "tests/test2.txt contain read and write requests to same set"
-	./llc -f $(TST_DIR)/test2.txt > $(LOG_DIR)/llc_test2_log.txt
+	./llc -s -f $(TST_DIR)/test2.txt > $(LOG_DIR)/llc_test2_log.txt
 
+cc1:
+	@echo "Testing with tests/cc1.din ..."
+	./llc -s -f $(TST_DIR)/cc1.din > $(LOG_DIR)/llc_cc1_log.txt
 clean:
-	$(RM) $(OBJ_DIR)/*.o $(LOG_DIR)/*.txt ./llc
+	$(RM) $(OBJ_DIR)/*.o $(LOG_DIR)/* ./llc

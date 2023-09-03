@@ -5,22 +5,26 @@
 
 #include "cache.h"
 #include "PLRU.h"
+#include "snoop.h"
 
-void mode_0(Set* _cache, Cache_Stats* _cache_stats, uint16_t* tag, uint16_t* set, uint8_t* byte_sel);
+extern bool normal;
+extern bool silent;
 
-void mode_1(Set* _cache, Cache_Stats* _cache_stats, uint16_t* tag, uint16_t* set, uint8_t* byte_sel);
+void mode_0(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* tag, uint16_t* set);
 
-void mode_2(Set* _cache, Cache_Stats* _cache_stats, uint16_t* tag, uint16_t* set, uint8_t* byte_sel);
+void mode_1(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* tag, uint16_t* set);
 
-void mode_3(Set* _cache, Cache_Stats* _cache_stats, uint16_t* tag, uint16_t* set, uint8_t* byte_sel);
+void mode_2(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* tag, uint16_t* set);
 
-void mode_4(Set* _cache, Cache_Stats* _cache_stats, uint16_t* tag, uint16_t* set, uint8_t* byte_sel);
+void mode_3(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* tag, uint16_t* set);
 
-void mode_5(Set* _cache, Cache_Stats* _cache_stats, uint16_t* tag, uint16_t* set, uint8_t* byte_sel);
+void mode_4(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* tag, uint16_t* set);
 
-void mode_6(Set* _cache, Cache_Stats* _cache_stats, uint16_t* tag, uint16_t* set, uint8_t* byte_sel);
+void mode_5(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* tag, uint16_t* set);
 
-void mode_8(Set* _cache, Cache_Stats* _cache_stats);
+void mode_6(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* tag, uint16_t* set);
+
+void mode_8(Set* _cache);
 
 void mode_9(Set* _cache);
 

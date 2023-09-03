@@ -3,8 +3,6 @@
 
 #include <stdint.h>
 
-uint32_t addr;
-
 uint16_t tag;
 uint16_t set;
 uint8_t byte_sel;

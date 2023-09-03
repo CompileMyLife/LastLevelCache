@@ -20,6 +20,7 @@ typedef struct __cache_stats {
     uint64_t hits;
     uint64_t misses;
     float    hit_ratio;
+    float    miss_ratio;
 } Cache_Stats;
 
 typedef struct __set {
@@ -38,8 +39,11 @@ void delete_cache(Set* _cache);
 
 void init_cache(Set* _cache, Cache_Stats* _cache_stats);
 
+void reset_cache(Set* _cache);
+
 int tag_exists(Set* _cache, uint16_t* tag, uint16_t* set);
 
-void print_cache_stats(Cache_Stats* _cache_stats, uint8_t* n, bool* mode);
+int empty_way(Set* _cache, uint16_t* set, int way);
 
+void print_cache_content(Set* _cache);
 #endif

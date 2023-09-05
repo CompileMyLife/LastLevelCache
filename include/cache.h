@@ -26,6 +26,7 @@ typedef struct __cache_stats {
 typedef struct __set {
     // Do not need to fill cache lines since no data provided just simulated
     //uint8_t  line[8][64];
+    uint32_t address;
     uint16_t tag[8];
     uint8_t  valid_b[8];
     //uint8_t  dirty_b[8]; 

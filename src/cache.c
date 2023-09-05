@@ -19,11 +19,12 @@ void delete_cache(Set* cache) {
 
 void init_cache(Set* _cache, Cache_Stats* _cache_stats) {
     // Initialize all stats variables
-    _cache_stats->reads     = 0;
-    _cache_stats->writes    = 0;
-    _cache_stats->hits      = 0;
-    _cache_stats->misses    = 0;
-    _cache_stats->hit_ratio = 0;
+    _cache_stats->reads      = 0;
+    _cache_stats->writes     = 0;
+    _cache_stats->hits       = 0;
+    _cache_stats->misses     = 0;
+    _cache_stats->hit_ratio  = 0.0;
+    _cache_stats->miss_ratio = 0.0;
 
     // Initialize correct MESI state and LRU bits for each set in cache
     // Iterate over each set
@@ -42,6 +43,7 @@ void reset_cache(Set* _cache) {
     // 0 for each set in cache
     for (int i = 0; i < 32768; i++){
         _cache[i].LRU_b = 0x00;
+        _cache[i].address = 0x00000000;
 
         // Iterate over each way or line
         for (int j = 0; j < 8; j++){

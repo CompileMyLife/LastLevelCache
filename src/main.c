@@ -116,7 +116,7 @@ int main(int argc, char *argv[]) { // Store option from CLI
         cache_stats.hit_ratio = (double) cache_stats.hits / (double) (cache_stats.reads + cache_stats.writes);
         cache_stats.miss_ratio = (double) cache_stats.misses / (double) (cache_stats.reads + cache_stats.writes);
         
-        fprintf(stdout, "Total Memory Accesses = %ld, Reads = %ld, Writes = %ld, HITs = %ld, MISSes = %ld, Hit_ratio = %f, Miss_ratio = %f\n", cache_stats.reads + cache_stats.writes, cache_stats.reads, cache_stats.writes, cache_stats.hits, cache_stats.misses, cache_stats.hit_ratio, cache_stats.miss_ratio);
+        fprintf(stdout, "Total Memory Accesses = %ld, Reads = %ld, Writes = %ld, HITs = %ld, MISSes = %ld, Hit Ratio = %f, Miss Ratio = %f\n", cache_stats.reads + cache_stats.writes, cache_stats.reads, cache_stats.writes, cache_stats.hits, cache_stats.misses, cache_stats.hit_ratio, cache_stats.miss_ratio);
 
         delete_cache(Cache);
 

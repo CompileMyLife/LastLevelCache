@@ -42,13 +42,13 @@ void mode_0(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
                 else if (get_snoop_result(addr) == NOHIT) {
                     _cache[*set].MESI_b[way] = EXCLUSIVE;
                     _cache[*set].tag[way] = *tag;
+                    _cache[*set].address  = *addr;
                     _cache[*set].valid_b[way] = 1;
                     _cache_stats->misses++;
                     return;
                 }
         } 
     }
-// TODO: NEED TO FIX
     // The tag does not exist in set
     else {
         // Cache MISS
@@ -59,6 +59,7 @@ void mode_0(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
             // Cache MISS
             update_LRU(_cache, set, way);
             _cache[*set].tag[way] = *tag;
+            _cache[*set].address  = *addr;
             _cache[*set].MESI_b[way] = EXCLUSIVE; // INVALID->EXCLUSIVE
             _cache[*set].valid_b[way] = 1;
             _cache_stats->misses++;
@@ -69,10 +70,48 @@ void mode_0(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
             // Find the way to evict using LRU_b then update the bits
             // and replace that way
             way = evict_LRU(_cache, tag, set); 
-            _cache[*set].MESI_b[way] = EXCLUSIVE;  // INVALID->EXCLUSIVE
-            _cache[*set].valid_b[way] = 1;
-            _cache_stats->misses++;
-            return;
+
+            switch(_cache[*set].MESI_b[way]) {
+                case MODIFIED:
+                    operate_bus("WRITE", &_cache[*set].address); // eviction address
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    operate_bus("READ", addr); // read the new address
+                    break;
+
+                case EXCLUSIVE:
+                    operate_bus("READ", addr);
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    break;
+
+                case SHARED:
+                    operate_bus("READ", addr);
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    break;
+
+                case INVALID:
+                default:
+                    operate_bus("READ", addr);
+                    break;
+            }
+           
+            if (get_snoop_result(addr) == HIT || get_snoop_result(addr) == HITM) { 
+                update_LRU(_cache, set, way);
+                _cache[*set].tag[way] = *tag;
+                _cache[*set].address  = *addr;
+                _cache[*set].MESI_b[way] = SHARED;
+                _cache[*set].valid_b[way] = 1;
+                _cache_stats->misses++;
+                return;
+            }
+            else if (get_snoop_result(addr) == NOHIT) {
+                update_LRU(_cache, set, way);
+                _cache[*set].MESI_b[way] = EXCLUSIVE; 
+                _cache[*set].tag[way] = *tag;
+                _cache[*set].address  = *addr;
+                _cache[*set].valid_b[way] = 1;
+                _cache_stats->misses++;
+                return;
+            }
         }
     }
 }
@@ -124,7 +163,6 @@ void mode_1(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
                 return;
         }
     }
-// TODO: NEED TO FIX
     // The tag does not exist in set
     else {
         // Cache MISS
@@ -134,6 +172,7 @@ void mode_1(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
         if (way != -1) {
             // Cache MISS
             update_LRU(_cache, set, way);
+            _cache[*set].address  = *addr;
             _cache[*set].tag[way] = *tag;
             _cache[*set].MESI_b[way] = EXCLUSIVE; // INVALID->EXCLUSIVE
             _cache[*set].valid_b[way] = 1;
@@ -145,10 +184,49 @@ void mode_1(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
             // Find the way to evict using LRU_b then update the bits
             // and replace that way
              way = evict_LRU(_cache, tag, set); 
-             _cache[*set].MESI_b[way] = MODIFIED;  // INVALID->MODIFIED
-             _cache[*set].valid_b[way] = 1;
-             _cache_stats->misses++;
-             return;
+
+             switch(_cache[*set].MESI_b[way]) {
+                case MODIFIED:
+                    operate_bus("WRITE", &_cache[*set].address);
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    operate_bus("RWIM", addr);
+                    _cache[*set].address     = *addr;
+                    _cache[*set].tag[way]    = *tag;
+                    _cache[*set].MESI_b[way] = MODIFIED;  // INVALID->MODIFIED
+                    _cache[*set].valid_b[way] = 1;
+                    _cache_stats->misses++;
+                    return;
+
+                case EXCLUSIVE:
+                    operate_bus("RWIM", addr);
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    _cache[*set].address     = *addr;
+                    _cache[*set].tag[way]    = *tag;
+                    _cache[*set].MESI_b[way] = MODIFIED;  // INVALID->MODIFIED
+                    _cache[*set].valid_b[way] = 1;
+                    _cache_stats->misses++;
+                    return;
+
+                case SHARED:
+                    operate_bus("RWIM", addr);
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    _cache[*set].address     = *addr;
+                    _cache[*set].tag[way]    = *tag;
+                    _cache[*set].MESI_b[way] = MODIFIED;  // INVALID->MODIFIED
+                    _cache[*set].valid_b[way] = 1;
+                    _cache_stats->misses++;
+                    return; 
+
+                case INVALID:
+                default:
+                    operate_bus("RWIM", addr);
+                    _cache[*set].address     = *addr;
+                    _cache[*set].tag[way]    = *tag;
+                    _cache[*set].MESI_b[way] = MODIFIED;  // INVALID->MODIFIED
+                    _cache[*set].valid_b[way] = 1;
+                    _cache_stats->misses++;
+                    return; 
+             }
         }
     }
 }
@@ -208,6 +286,7 @@ void mode_2(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
         if (way != -1) {
             // Cache MISS
             update_LRU(_cache, set, way);
+            _cache[*set].address  = *addr;
             _cache[*set].tag[way] = *tag;
             _cache[*set].MESI_b[way] = EXCLUSIVE; // INVALID->EXCLUSIVE
             _cache[*set].valid_b[way] = 1;
@@ -219,10 +298,48 @@ void mode_2(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
             // Find the way to evict using LRU_b then update the bits
             // and replace that way
             way = evict_LRU(_cache, tag, set); 
-            _cache[*set].MESI_b[way] = EXCLUSIVE;  // INVALID->EXCLUSIVE
-            _cache[*set].valid_b[way] = 1;
-            _cache_stats->misses++;
-            return;
+
+            switch(_cache[*set].MESI_b[way]) {
+                case MODIFIED:
+                    operate_bus("WRITE", &_cache[*set].address); // eviction address
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    operate_bus("READ", addr); // read the new address
+                    break;
+
+                case EXCLUSIVE:
+                    operate_bus("READ", addr);
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    break;
+
+                case SHARED:
+                    operate_bus("READ", addr);
+                    msg_to_cache("EVICTLINE", &_cache[*set].address); // evict the line in higher level cache
+                    break;
+
+                case INVALID:
+                default:
+                    operate_bus("READ", addr);
+                    break;
+            }
+           
+            if (get_snoop_result(addr) == HIT || get_snoop_result(addr) == HITM) { 
+                update_LRU(_cache, set, way);
+                _cache[*set].tag[way] = *tag;
+                _cache[*set].address  = *addr;
+                _cache[*set].MESI_b[way] = SHARED;
+                _cache[*set].valid_b[way] = 1;
+                _cache_stats->misses++;
+                return;
+            }
+            else if (get_snoop_result(addr) == NOHIT) {
+                update_LRU(_cache, set, way);
+                _cache[*set].MESI_b[way] = EXCLUSIVE; 
+                _cache[*set].tag[way] = *tag;
+                _cache[*set].address  = *addr;
+                _cache[*set].valid_b[way] = 1;
+                _cache_stats->misses++;
+                return;
+            }
         }
     }
 }

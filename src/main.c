@@ -7,6 +7,7 @@
 #include "cache.h"
 #include "ops.h"
 
+// Debug macro
 #define DEBUG 0
 
 // Globally declared for other includes to use
@@ -113,11 +114,13 @@ int main(int argc, char *argv[]) { // Store option from CLI
         }
         fclose(fp);
 
+        // Calculate the ratios from statistics
         cache_stats.hit_ratio = (double) cache_stats.hits / (double) (cache_stats.reads + cache_stats.writes);
         cache_stats.miss_ratio = (double) cache_stats.misses / (double) (cache_stats.reads + cache_stats.writes);
         
         fprintf(stdout, "Total Memory Accesses = %ld, Reads = %ld, Writes = %ld, HITs = %ld, MISSes = %ld, Hit Ratio = %f, Miss Ratio = %f\n", cache_stats.reads + cache_stats.writes, cache_stats.reads, cache_stats.writes, cache_stats.hits, cache_stats.misses, cache_stats.hit_ratio, cache_stats.miss_ratio);
 
+        // Free allocated `Set`s
         delete_cache(Cache);
 
         exit(EXIT_SUCCESS);

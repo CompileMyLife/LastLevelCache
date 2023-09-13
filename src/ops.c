@@ -231,7 +231,7 @@ void mode_1(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
     }
 }
 
-// read request from L1 instruction cache
+// Read request from L1 instruction cache
 void mode_2(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* tag, uint16_t* set) {
     _cache_stats->reads++;
 
@@ -276,7 +276,6 @@ void mode_2(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
                 }
         } 
     }
-// TODO: NEED TO FIX
     // The tag does not exist in set
     else {
         // Cache MISS

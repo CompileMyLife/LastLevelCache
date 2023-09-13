@@ -1,5 +1,7 @@
 #include "cache.h"
 
+// Allocate 32768 sets in creation of the Cache
+// Returns an array/ptr of `Set` structs
 Set* create_cache(void) {
     Set* cache;
 
@@ -13,10 +15,12 @@ Set* create_cache(void) {
     return cache; 
 }
 
+// Frees up allocated `Set`s 
 void delete_cache(Set* cache) {
     free(cache);
 }
 
+// Initialize the Cache to certain state and Cache Statistics to 0
 void init_cache(Set* _cache, Cache_Stats* _cache_stats) {
     // Initialize all stats variables
     _cache_stats->reads      = 0;
@@ -38,6 +42,7 @@ void init_cache(Set* _cache, Cache_Stats* _cache_stats) {
     }
 }
 
+// Reset Cache to default state as in init_cache()
 void reset_cache(Set* _cache) {
     // Reinitialize the MESI states to INVALID, LRU bits to 0x00 and the tag to
     // 0 for each set in cache
@@ -53,6 +58,8 @@ void reset_cache(Set* _cache) {
     }
 }
 
+// Check if a matching tag exists in Cache given the tag and set
+// Returns the way if a tag exists else a -1 if no tag exists
 int tag_exists(Set* _cache, uint16_t* tag, uint16_t* set) {
     // Iterate over each way to check if the tag exists
     for (int i = 0; i < 8; i++) {
@@ -64,6 +71,8 @@ int tag_exists(Set* _cache, uint16_t* tag, uint16_t* set) {
     return -1; 
 }
 
+// Check if an empty way is located in set of the Cache
+// Returns the empty way else a -1 if no empty way
 int empty_way(Set* _cache, uint16_t* set, int way) {
     // Iterate over each way to check if there is any empty ways
     for (int i = 0; (i < 8) && (way < 0); i++) {
@@ -80,6 +89,7 @@ int empty_way(Set* _cache, uint16_t* set, int way) {
     }
 }
 
+// Print out all valid cache lines/ways
 void print_cache_content(Set* _cache) {
     for (int idx = 0; idx < 32768; idx++) {
         for (int way = 0; way < 8; way++) {

@@ -8,6 +8,7 @@ associative. It employs a write allocate policy and uses the MESI protocol to
 ensure cache coherence. The replacement policy is implemented with a psuedo LRU
 algorithm.
 
+
 ## System and Software Requirements
 The source code was built and tested on `Ubuntu 20.04.6 LTS` with the following tools:
 * gcc 9.4.0
@@ -21,3 +22,6 @@ $ ./llc -f <path/to/file>
 ```
 **NOTE**: Can apply `-s` flag for Silent mode. `llc` program runs by default in
 Normal mode
+
+## More Information
+Visit the [Wiki](https://github.com/CompileMyLife/LastLevelCache/wiki) to understand more on the LLC!

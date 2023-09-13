@@ -6,7 +6,8 @@
 
 #include "cache.h"
 
-// Checks if the bitn == 0 then returns 0 else it returns 1 if bitn == 1
+// Checks if the bitn == 0 
+// Returns 0 else it returns 1 if bitn == 1
 int check_bit(uint8_t num, uint8_t bitn);
 
 // Returns the way that needs to be evicted and replaces that way

@@ -1,5 +1,7 @@
 #include "PLRU.h"
 
+// Checks if the bitn == 0 
+// Returns 0 else it returns 1 if bitn == 1
 int check_bit(uint8_t num, uint8_t bitn) {
     // Check IF bitn == 1
     if (num & (1 << bitn)) {
@@ -11,6 +13,9 @@ int check_bit(uint8_t num, uint8_t bitn) {
     }
 }
 
+// Returns the way that needs to be evicted and replaces that way
+// NOTE: Sets the bit if taking LEFT path
+//      and Clears the bit if taking RIGHT path
 int evict_LRU(Set* _cache, uint16_t* tag, uint16_t* set) {
     // Check IF bit 0 == 0
     if (!check_bit(_cache[*set].LRU_b, 0)) {
@@ -100,17 +105,11 @@ int evict_LRU(Set* _cache, uint16_t* tag, uint16_t* set) {
             }
         }
     }
-
-#if 0 // Will need seperate function to call for a non valid way
-    // ELSE replace non-valid way
-    else {
-        _cache[*set].tag[flag]     = *tag; 
-        _cache[*set].valid_b[flag] = 1;
-    }
-#endif
-
 }
 
+// Search for the way accessed and updates the LRU bits
+// NOTE: Clears the bit if taking LEFT path 
+//      and Sets the bit if taking RIGHT path
 void update_LRU(Set* _cache, uint16_t* set, int way) {     
     switch(way) {
         case 0:  // way 0

@@ -1,0 +1,5 @@
+idx = 14536, way = 0, tag = 199, MESI = 3, LRU = 0
+idx = 14596, way = 0, tag = 111, MESI = 3, LRU = 0
+idx = 14536, way = 0, tag = 199, MESI = 0, LRU = 0
+idx = 14596, way = 0, tag = 111, MESI = 0, LRU = 0
+Total Memory Accesses = 6, Reads = 2, Writes = 4, HITs = 2, MISSes = 2, Hit Ratio = 0.333333, Miss Ratio = 0.333333

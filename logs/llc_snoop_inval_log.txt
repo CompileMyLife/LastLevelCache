@@ -1,0 +1,5 @@
+idx = 14212, way = 0, tag = 423, MESI = 2, LRU = 8
+idx = 14212, way = 1, tag = 3BC, MESI = 2, LRU = 8
+idx = 14212, way = 0, tag = 423, MESI = 2, LRU = 8
+idx = 14212, way = 1, tag = 3BC, MESI = 2, LRU = 8
+Total Memory Accesses = 2, Reads = 2, Writes = 0, HITs = 0, MISSes = 2, Hit Ratio = 0.000000, Miss Ratio = 1.000000

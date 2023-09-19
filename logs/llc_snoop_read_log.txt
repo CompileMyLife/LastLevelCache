@@ -1,0 +1,11 @@
+idx = 14212, way = 0, tag = 80, MESI = 2, LRU = 8
+idx = 14212, way = 1, tag = 4CD, MESI = 2, LRU = 8
+Snoop Result Address: 099ADE0E, Snoop Result: HIT
+idx = 14212, way = 0, tag = 80, MESI = 2, LRU = 8
+idx = 14212, way = 1, tag = 4CD, MESI = 2, LRU = 8
+idx = 27512, way = 0, tag = 4C, MESI = 1, LRU = 0
+Snoop Result Address: 100DE112, Snoop Result: HIT
+idx = 14212, way = 0, tag = 80, MESI = 1, LRU = 8
+idx = 14212, way = 1, tag = 4CD, MESI = 2, LRU = 8
+idx = 27512, way = 0, tag = 4C, MESI = 1, LRU = 0
+Total Memory Accesses = 5, Reads = 4, Writes = 1, HITs = 0, MISSes = 3, Hit Ratio = 0.000000, Miss Ratio = 0.600000

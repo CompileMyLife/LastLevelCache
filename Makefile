@@ -17,7 +17,7 @@ OBJS = $(OBJ_DIR)/parse.o $(OBJ_DIR)/snoop.o $(OBJ_DIR)/cache.o $(OBJ_DIR)/PLRU.
 all: llc
 
 help:
-	@echo "Targets: help, all, llc, test0, test1, test2, cc1 and clean"
+	@echo "Targets: help, all, llc, test, and clean"
 
 llc: $(OBJS)
 	$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(SRC_DIR)/main.c $^
@@ -37,6 +37,10 @@ $(OBJ_DIR)/ops.o: $(SRC_DIR)/ops.c $(INC_DIR)/ops.h
 $(OBJ_DIR)/PLRU.o: $(SRC_DIR)/PLRU.c $(INC_DIR)/PLRU.h
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
+# Test each test target
+test: test0 test1 test2 cc1 snoop_inval snoop_read snoop_write snoop_rwim
+	@echo "Running all tests from tests/
+
 test0:
 	@echo "Testing with tests/test0.txt ..."
 	@echo "tests/test0.txt contains valid and invalid addresses to test parsing"
@@ -55,5 +59,22 @@ test2:
 cc1:
 	@echo "Testing with tests/cc1.din ..."
 	./llc -f $(TST_DIR)/cc1.din > $(LOG_DIR)/llc_cc1_log.txt
+
+snoop_inval:
+	@echo "Testing with tests/snoop_inval.txt ..."
+	./llc -f $(TST_DIR)/snoop_inval.txt > $(LOG_DIR)/llc_snoop_inval_log.txt
+
+snoop_read:
+	@echo "Testing with tests/snoop_read.txt ..."
+	./llc -f $(TST_DIR)/snoop_read.txt > $(LOG_DIR)/llc_snoop_read_log.txt
+
+snoop_write:
+	@echo "Testing with tests/snoop_write.txt ..."	
+	./llc -f $(TST_DIR)/snoop_write.txt > $(LOG_DIR)/llc_snoop_write_log.txt
+
+snoop_rwim:
+	@echo "Testing with tests/snoop_rwim.txt ..."
+	./llc -f $(TST_DIR)/snoop_rwim.txt > $(LOG_DIR)/llc_snoop_rwim_log.txt
+
 clean:
 	$(RM) $(OBJ_DIR)/*.o $(LOG_DIR)/* ./llc

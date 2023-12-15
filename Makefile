@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = --std=gnu99 -Wall
+CFLAGS = -DDEBUG=0 --std=gnu99 -Wall
 
 # Directories
 SRC_DIR = src
@@ -39,7 +39,7 @@ $(OBJ_DIR)/PLRU.o: $(SRC_DIR)/PLRU.c $(INC_DIR)/PLRU.h
 
 # Test each test target
 test: test0 test1 test2 cc1 snoop_inval snoop_read snoop_write snoop_rwim
-	@echo "Running all tests from tests/
+	@echo "Running all tests from tests/"
 
 test0:
 	@echo "Testing with tests/test0.txt ..."

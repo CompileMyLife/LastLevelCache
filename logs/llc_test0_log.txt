@@ -1,1 +1,0 @@
-Total Memory Accesses = 5, Reads = 4, Writes = 1, HITs = 3, MISSes = 2, Hit Ratio = 0.600000, Miss Ratio = 0.400000

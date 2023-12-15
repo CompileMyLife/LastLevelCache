@@ -1,9 +1,0 @@
-idx = 17684, way = 0, tag = 7FF, MESI = 2, LRU = 0
-idx = 21828, way = 0, tag = 7FF, MESI = 2, LRU = 0
-Snoop Result Address: FFF1453F, Snoop Result: HIT
-L2 Cache: SENDLINE FFF1453F
-Snoop Result Address: FFF5513F, Snoop Result: HIT
-L2 Cache: SENDLINE FFF5513F
-idx = 17684, way = 0, tag = 7FF, MESI = 0, LRU = 0
-idx = 21828, way = 0, tag = 7FF, MESI = 0, LRU = 0
-Total Memory Accesses = 4, Reads = 4, Writes = 0, HITs = 0, MISSes = 2, Hit Ratio = 0.000000, Miss Ratio = 0.500000

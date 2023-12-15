@@ -7,9 +7,6 @@
 #include "cache.h"
 #include "ops.h"
 
-// Debug macro
-#define DEBUG 0
-
 // Globally declared for other includes to use
 bool normal = 1, silent = 0;
 

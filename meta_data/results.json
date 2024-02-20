@@ -13,6 +13,18 @@
             }
         },
         {
+            "cc1": {
+                "Total Memory Accesses": "1000002",
+                "Reads": "916972",
+                "Writes": "83030",
+                "HITs": "995896",
+                "MISSes": "4106",
+                "Hit Ratio": "0.995894",
+                "Miss Ratio": "0.004106",
+                "log": "llc_cc1_log"
+            }
+        },
+        {
             "snoop_inval": {
                 "Total Memory Accesses": "3",
                 "Reads": "2",
@@ -97,6 +109,7 @@
     ],
     "tests": [
         "test1",
+        "cc1",
         "snoop_inval",
         "snoop_write",
         "test3",

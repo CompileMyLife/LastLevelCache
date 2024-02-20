@@ -11,7 +11,7 @@ LOGS_DIR            = "logs"
 TESTS_DIR           = "tests"
 
 LOGS_FILE_PATTERN   = "llc" 
-TESTS_FILE_PATTERNS = ["test", "snoop"]
+TESTS_FILE_PATTERNS = ["test", "snoop", "cc1"]
 
 METRICS_REGEXES     = {"Total Memory Accesses": r"([0-9]+)",
                        "Reads": r"([0-9]+)",

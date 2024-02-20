@@ -352,12 +352,14 @@ void mode_3(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
         if (_cache[*set].MESI_b[way] == SHARED) {
             update_LRU(_cache, set, way);
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             put_snoop_result(addr, HIT);
             msg_to_cache("INVALIDATELINE", addr);
             return;
         }
         else if (_cache[*set].MESI_b[way] == INVALID) {
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             put_snoop_result(addr, NOHIT);
             return;
         }
@@ -379,23 +381,27 @@ void mode_4(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
     if (way != -1) {
         if (_cache[*set].MESI_b[way] == MODIFIED) {
             _cache[*set].MESI_b[way] = SHARED;
+            _cache[*set].valid_b[way] = 1;
             put_snoop_result(addr, HITM);
             operate_bus("WRITE", addr);
             return; 
         }
         else if (_cache[*set].MESI_b[way] == EXCLUSIVE) {
             _cache[*set].MESI_b[way] = SHARED;
+            _cache[*set].valid_b[way] = 1;
             put_snoop_result(addr, HIT);
             return;
         }
         else if (_cache[*set].MESI_b[way] == SHARED) {
             _cache[*set].MESI_b[way] = SHARED;
+            _cache[*set].valid_b[way] = 1;
             put_snoop_result(addr, HIT);
             return;
         }
 
         else {
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             return;
         } 
     }
@@ -416,18 +422,22 @@ void mode_5(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
     if (way != -1) {
         if (_cache[*set].MESI_b[way] == SHARED) {
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             return;
         }
         else if (_cache[*set].MESI_b[way] == MODIFIED) {
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             return;
         }
         else if (_cache[*set].MESI_b[way] == EXCLUSIVE) {
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             return;
         }
         else {
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             put_snoop_result(addr, NOHIT);
             return;
         }
@@ -449,6 +459,7 @@ void mode_6(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
         if (_cache[*set].MESI_b[way] == SHARED) {
             update_LRU(_cache, set, way);
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             put_snoop_result(addr, HIT);
             msg_to_cache("INVALIDATELINE", addr);
             return;
@@ -457,6 +468,7 @@ void mode_6(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
         else if (_cache[*set].MESI_b[way] == MODIFIED) {
             update_LRU(_cache, set, way);
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             put_snoop_result(addr, HITM);
             operate_bus("WRITE", addr);
             msg_to_cache("GETLINE", addr);
@@ -465,6 +477,7 @@ void mode_6(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
         else if (_cache[*set].MESI_b[way] == EXCLUSIVE) {
             update_LRU(_cache, set, way);
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             put_snoop_result(addr, HIT);
             msg_to_cache("SENDLINE", addr);
             return;
@@ -472,6 +485,7 @@ void mode_6(Set* _cache, Cache_Stats* _cache_stats, uint32_t* addr, uint16_t* ta
 
         else {
             _cache[*set].MESI_b[way] = INVALID;
+            _cache[*set].valid_b[way] = 0;
             put_snoop_result(addr, NOHIT);
             return;
         }

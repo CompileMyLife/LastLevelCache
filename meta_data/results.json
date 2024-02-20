@@ -1,0 +1,108 @@
+{
+    "results": [
+        {
+            "test0": {
+                "Total Memory Accesses": "5",
+                "Reads": "4",
+                "Writes": "1",
+                "HITs": "3",
+                "MISSes": "2",
+                "Hit Ratio": "0.600000",
+                "Miss Ratio": "0.400000",
+                "log": "llc_test0_log"
+            }
+        },
+        {
+            "snoop_inval": {
+                "Total Memory Accesses": "3",
+                "Reads": "2",
+                "Writes": "1",
+                "HITs": "1",
+                "MISSes": "2",
+                "Hit Ratio": "0.333333",
+                "Miss Ratio": "0.666667",
+                "log": "llc_snoop_inval_log"
+            }
+        },
+        {
+            "snoop_read": {
+                "Total Memory Accesses": "5",
+                "Reads": "4",
+                "Writes": "1",
+                "HITs": "0",
+                "MISSes": "3",
+                "Hit Ratio": "0.000000",
+                "Miss Ratio": "0.600000",
+                "log": "llc_snoop_read_log"
+            }
+        },
+        {
+            "test2": {
+                "Total Memory Accesses": "20",
+                "Reads": "13",
+                "Writes": "7",
+                "HITs": "4",
+                "MISSes": "15",
+                "Hit Ratio": "0.200000",
+                "Miss Ratio": "0.750000",
+                "log": "llc_test2_log"
+            }
+        },
+        {
+            "snoop_write": {
+                "Total Memory Accesses": "6",
+                "Reads": "2",
+                "Writes": "4",
+                "HITs": "2",
+                "MISSes": "2",
+                "Hit Ratio": "0.333333",
+                "Miss Ratio": "0.333333",
+                "log": "llc_snoop_write_log"
+            }
+        },
+        {
+            "test1": {
+                "Total Memory Accesses": "8",
+                "Reads": "8",
+                "Writes": "0",
+                "HITs": "0",
+                "MISSes": "8",
+                "Hit Ratio": "0.000000",
+                "Miss Ratio": "1.000000",
+                "log": "llc_test1_log"
+            }
+        },
+        {
+            "snoop_rwim": {
+                "Total Memory Accesses": "4",
+                "Reads": "4",
+                "Writes": "0",
+                "HITs": "0",
+                "MISSes": "2",
+                "Hit Ratio": "0.000000",
+                "Miss Ratio": "0.500000",
+                "log": "llc_snoop_rwim_log"
+            }
+        }
+    ],
+    "logs": [
+        "llc_test0_log",
+        "llc_cc1_log",
+        "llc_snoop_inval_log",
+        "llc_snoop_read_log",
+        "llc_test2_log",
+        "llc_snoop_write_log",
+        "llc_test1_log",
+        "llc_snoop_rwim_log"
+    ],
+    "tests": [
+        "test1",
+        "snoop_inval",
+        "snoop_write",
+        "test3",
+        "snoop_read",
+        "snoop_rwim",
+        "test2",
+        "test0"
+    ]
+}

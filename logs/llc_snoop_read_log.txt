@@ -1,11 +1,21 @@
+Normal Mode = 1, Silent Mode = 0, File Flag = 1, optind = 3
+file argument = tests/snoop_read.txt
+mode: 0, address: 100DE130, tag: 80, index: 3784, byte sel.: 30
+mode: 0, address: 99ADE12E, tag: 4CD, index: 3784, byte sel.: 2E
 idx = 14212, way = 0, tag = 80, MESI = 2, LRU = 8
 idx = 14212, way = 1, tag = 4CD, MESI = 2, LRU = 8
+mode: 9, address: 0, tag: 0, index: 0, byte sel.: 0
+mode: 1, address: 99ADE1F0, tag: 4CD, index: 3787, byte sel.: 30
 Snoop Result Address: 99ADE0E0, Snoop Result: NOHIT
+mode: 4, address: 99ADE0E0, tag: 4CD, index: 3783, byte sel.: 20
 idx = 14212, way = 0, tag = 80, MESI = 2, LRU = 8
 idx = 14212, way = 1, tag = 4CD, MESI = 2, LRU = 8
 idx = 14215, way = 0, tag = 4CD, MESI = 2, LRU = 0
+mode: 9, address: 0, tag: 0, index: 0, byte sel.: 0
 Snoop Result Address: 100DE112, Snoop Result: HIT
+mode: 4, address: 100DE112, tag: 80, index: 3784, byte sel.: 12
 idx = 14212, way = 0, tag = 80, MESI = 1, LRU = 8
 idx = 14212, way = 1, tag = 4CD, MESI = 2, LRU = 8
 idx = 14215, way = 0, tag = 4CD, MESI = 2, LRU = 0
+mode: 9, address: 0, tag: 0, index: 0, byte sel.: 0
 Total Memory Accesses = 5, Reads = 4, Writes = 1, HITs = 0, MISSes = 3, Hit Ratio = 0.000000, Miss Ratio = 0.600000

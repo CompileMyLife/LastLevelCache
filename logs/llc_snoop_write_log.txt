@@ -1,5 +1,13 @@
+Normal Mode = 1, Silent Mode = 0, File Flag = 1, optind = 3
+file argument = tests/snoop_write.txt
+mode: 0, address: 332E3222, tag: 199, index: 38C8, byte sel.: 22
+mode: 0, address: 222E4123, tag: 111, index: 3904, byte sel.: 23
+mode: 1, address: 332E3222, tag: 199, index: 38C8, byte sel.: 22
+mode: 1, address: 222E4123, tag: 111, index: 3904, byte sel.: 23
 idx = 14536, way = 0, tag = 199, MESI = 3, LRU = 0
 idx = 14596, way = 0, tag = 111, MESI = 3, LRU = 0
-idx = 14536, way = 0, tag = 199, MESI = 0, LRU = 0
-idx = 14596, way = 0, tag = 111, MESI = 0, LRU = 0
+mode: 9, address: 0, tag: 0, index: 0, byte sel.: 0
+mode: 5, address: 222E413F, tag: 111, index: 3904, byte sel.: 3F
+mode: 5, address: 332E323F, tag: 199, index: 38C8, byte sel.: 3F
+mode: 9, address: 0, tag: 0, index: 0, byte sel.: 0
 Total Memory Accesses = 6, Reads = 2, Writes = 4, HITs = 2, MISSes = 2, Hit Ratio = 0.333333, Miss Ratio = 0.333333

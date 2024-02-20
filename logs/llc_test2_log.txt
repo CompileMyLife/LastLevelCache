@@ -1,19 +1,41 @@
+Normal Mode = 1, Silent Mode = 0, File Flag = 1, optind = 3
+file argument = tests/test2.txt
+mode: 0, address: 984DE132, tag: 4C2, index: 3784, byte sel.: 32
+mode: 0, address: 116DE12F, tag: 8B, index: 3784, byte sel.: 2F
+mode: 0, address: 100DE130, tag: 80, index: 3784, byte sel.: 30
+mode: 0, address: 99ADE12E, tag: 4CD, index: 3784, byte sel.: 2E
+mode: 0, address: 646DE10A, tag: 323, index: 3784, byte sel.: A
+mode: 0, address: 846DE107, tag: 423, index: 3784, byte sel.: 7
+mode: 0, address: 212DE128, tag: 109, index: 3784, byte sel.: 28
+mode: 0, address: 778DE133, tag: 3BC, index: 3784, byte sel.: 33
+mode: 0, address: 99ADE132, tag: 4CD, index: 3784, byte sel.: 32
+mode: 1, address: 116DE123, tag: 8B, index: 3784, byte sel.: 23
 Bus Operation: WRITE, Address: 00000003, Snoop Result: HIT
 L2 Cache: EVICTLINE 00000003
 Bus Operation: RWIM, Address: 00000001, Snoop Result: NOHIT
+mode: 1, address: 1, tag: 333, index: 3784, byte sel.: 35
 Bus Operation: RWIM, Address: 00000000, Snoop Result: HIT
 L2 Cache: EVICTLINE 00000001
+mode: 1, address: 0, tag: 199, index: 3784, byte sel.: 2C
+mode: 0, address: 846DE10C, tag: 423, index: 3784, byte sel.: C
 Bus Operation: READ, Address: 00000002, Snoop Result: HITM
 L2 Cache: EVICTLINE 00000000
+mode: 0, address: 2, tag: 3B9, index: 3784, byte sel.: 36
 Bus Operation: RWIM, Address: 00000000, Snoop Result: HIT
 L2 Cache: EVICTLINE 00000002
+mode: 1, address: 0, tag: 55E, index: 3784, byte sel.: 28
 Bus Operation: READ, Address: 00000001, Snoop Result: NOHIT
 L2 Cache: EVICTLINE 00000000
+mode: 0, address: 1, tag: 8B, index: 3784, byte sel.: 1
+mode: 1, address: 100DE101, tag: 80, index: 3784, byte sel.: 1
 Bus Operation: WRITE, Address: 00000001, Snoop Result: NOHIT
 L2 Cache: EVICTLINE 00000001
 Bus Operation: RWIM, Address: 00000001, Snoop Result: NOHIT
+mode: 1, address: 1, tag: 555, index: 3784, byte sel.: 1
 Bus Operation: RWIM, Address: 00000001, Snoop Result: NOHIT
 L2 Cache: EVICTLINE 00000001
+mode: 1, address: 1, tag: 76E, index: 3784, byte sel.: 1
 Snoop Result Address: AAADE101, Snoop Result: HITM
 Bus Operation: WRITE, Address: 00000001, Snoop Result: NOHIT
+mode: 4, address: 1, tag: 555, index: 3784, byte sel.: 1
 Total Memory Accesses = 20, Reads = 13, Writes = 7, HITs = 4, MISSes = 15, Hit Ratio = 0.200000, Miss Ratio = 0.750000

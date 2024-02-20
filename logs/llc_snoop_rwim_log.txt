@@ -1,9 +1,15 @@
+Normal Mode = 1, Silent Mode = 0, File Flag = 1, optind = 3
+file argument = tests/snoop_rwim.txt
+mode: 0, address: FFF14512, tag: 7FF, index: 4514, byte sel.: 12
+mode: 0, address: FFF55113, tag: 7FF, index: 5544, byte sel.: 13
 idx = 17684, way = 0, tag = 7FF, MESI = 2, LRU = 0
 idx = 21828, way = 0, tag = 7FF, MESI = 2, LRU = 0
+mode: 9, address: 0, tag: 0, index: 0, byte sel.: 0
 Snoop Result Address: FFF1453F, Snoop Result: HIT
 L2 Cache: SENDLINE FFF1453F
+mode: 6, address: FFF1453F, tag: 7FF, index: 4514, byte sel.: 3F
 Snoop Result Address: FFF5513F, Snoop Result: HIT
 L2 Cache: SENDLINE FFF5513F
-idx = 17684, way = 0, tag = 7FF, MESI = 0, LRU = 0
-idx = 21828, way = 0, tag = 7FF, MESI = 0, LRU = 0
+mode: 6, address: FFF5513F, tag: 7FF, index: 5544, byte sel.: 3F
+mode: 9, address: 0, tag: 0, index: 0, byte sel.: 0
 Total Memory Accesses = 4, Reads = 4, Writes = 0, HITs = 0, MISSes = 2, Hit Ratio = 0.000000, Miss Ratio = 0.500000

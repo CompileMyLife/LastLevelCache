@@ -1,1 +1,11 @@
+Normal Mode = 1, Silent Mode = 0, File Flag = 1, optind = 3
+file argument = tests/test1.txt
+mode: 0, address: 984DE132, tag: 4C2, index: 3784, byte sel.: 32
+mode: 0, address: 116DE12F, tag: 8B, index: 3784, byte sel.: 2F
+mode: 0, address: 100DE130, tag: 80, index: 3784, byte sel.: 30
+mode: 0, address: 99ADE12E, tag: 4CD, index: 3784, byte sel.: 2E
+mode: 0, address: 646DE10A, tag: 323, index: 3784, byte sel.: A
+mode: 0, address: 846DE107, tag: 423, index: 3784, byte sel.: 7
+mode: 0, address: 212DE128, tag: 109, index: 3784, byte sel.: 28
+mode: 0, address: 778DE133, tag: 3BC, index: 3784, byte sel.: 33
 Total Memory Accesses = 8, Reads = 8, Writes = 0, HITs = 0, MISSes = 8, Hit Ratio = 0.000000, Miss Ratio = 1.000000

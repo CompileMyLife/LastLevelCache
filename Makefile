@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -DDEBUG=0 --std=gnu99 -Wall
+CFLAGS = -DDEBUG=1 --std=gnu99 -Wall
 
 # Directories
 SRC_DIR = src
